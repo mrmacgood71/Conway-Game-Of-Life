@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">GoL</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="choose_color">Choose Color:</string>
+    <string name="cross_hair_cell">Crosshair Cell</string>
+    <string name="single_cell">Single Cell</string>
+    <string name="circle_cell">Circle Cell</string>
+    <string name="select_pointer">Select Pointer:</string>
+    <string name="alive_color">Alive Color:</string>
+    <string name="field_size">Field Size:</string>
+</resources>
