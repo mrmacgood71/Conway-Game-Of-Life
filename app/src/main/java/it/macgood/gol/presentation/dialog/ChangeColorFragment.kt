@@ -19,11 +19,6 @@ class ChangeColorFragment : DialogFragment() {
 
     private val settingsViewModel by activityViewModels<SettingsViewModel>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     private lateinit var binding: FragmentChangeColorBinding
 
     override fun onCreateView(
@@ -44,9 +39,8 @@ class ChangeColorFragment : DialogFragment() {
                     FieldColors(
                         aliveColor = envelope.color,
                         deadColor = deadColor
-                    ))
-
-                Log.d("TAG", "onCreateView: ${envelope.color}")
+                    )
+                )
             })
 
         } else if (tag!! == DEAD_COLOR_PICKER_TAG) {
@@ -59,13 +53,10 @@ class ChangeColorFragment : DialogFragment() {
                     FieldColors(
                         aliveColor = settingsViewModel.colors.value?.aliveColor,
                         deadColor = envelope.color
-                    ))
-                Log.d("TAG", "onCreateView: ${UiUtils.isColorReadable(envelope.color)}")
+                    )
+                )
             })
-
         }
-
-
         return binding.root
     }
 

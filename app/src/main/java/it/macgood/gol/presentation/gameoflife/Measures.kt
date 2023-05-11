@@ -15,4 +15,17 @@ sealed class Measures(
     class FortyFiveGridSize : Measures(45, 23)
     class FiftyGridSize : Measures(50, 20)
 
+    companion object {
+        val PICK = listOf<Measures>(
+            TenGridSize(),
+            FifteenGridSize(),
+            TwentyGridSize(),
+            TwentyFiveGridSize(),
+            ThirtyGridSize(),
+            ThirtyFiveGridSize(),
+            FortyGridSize(),
+            FortyFiveGridSize(),
+            FiftyGridSize()
+        )
+    }
 }

@@ -24,7 +24,7 @@ class GameOfLifeView : View {
         Color.rgb(0, 136, 151)
     )
 
-    private lateinit var measure: Measures
+    lateinit var measure: Measures
     private lateinit var currentGeneration: Array<BooleanArray>
     private lateinit var nextGeneration: Array<BooleanArray>
 
@@ -78,24 +78,20 @@ class GameOfLifeView : View {
     }
 
     fun nextGeneration() {
-        // calculate the next generation of cells based on the current generation
+        Thread.sleep(15)
         for (i in 0 until numRows) {
             for (j in 0 until numCols) {
                 val neighbors = countNeighbors(i, j)
                 if (currentGeneration[i][j]) {
-                    // a live cell with 2 or 3 neighbors survives, otherwise it dies
                     nextGeneration[i][j] = neighbors == 2 || neighbors == 3
                 } else {
-                    // a dead cell with 3 neighbors becomes alive
                     nextGeneration[i][j] = neighbors == 3
                 }
             }
         }
-        // update the current generation to the next generation
         val temp = currentGeneration
         currentGeneration = nextGeneration
         nextGeneration = temp
-        // redraw the view
         invalidate()
     }
 

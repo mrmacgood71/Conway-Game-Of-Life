@@ -1,10 +1,7 @@
 package it.macgood.gol.presentation.settings
 
 import android.R
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +14,7 @@ import it.macgood.core.utils.UiUtils
 import it.macgood.gol.databinding.FragmentSettingsBinding
 import it.macgood.gol.presentation.dialog.ChangeColorFragment
 import it.macgood.gol.presentation.gameoflife.ClickMode
+import it.macgood.gol.presentation.gameoflife.Measures
 import java.lang.String
 import java.util.*
 
@@ -35,21 +33,16 @@ class SettingsFragment : BottomSheetDialogFragment() {
 
 
         binding.measureSeekBar.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
-
-            }
-
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {}
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
-
-                Log.d("TAG", "onStopTrackingTouch: ${seekBar?.progress}")
+                settingsViewModel.clickSize.postValue(Measures.PICK[seekBar?.progress?.minus(1)!!])
             }
-
         })
 
+        settingsViewModel.clickSize.observe(viewLifecycleOwner) {
+            binding.measureSeekBar.progress = Measures.PICK.indexOf(it) + 1
+        }
         binding.chooseAliveColorLayout.setOnClickListener {
             ChangeColorFragment().show(
                 requireActivity().supportFragmentManager,
@@ -95,7 +88,7 @@ class SettingsFragment : BottomSheetDialogFragment() {
         }
 
         settingsViewModel.clickMode.observe(viewLifecycleOwner) {
-            when(it) {
+            when (it) {
                 is ClickMode.SingleCellMode -> {
                     binding.singleCellRadioButton.isChecked = true
                 }
@@ -105,7 +98,9 @@ class SettingsFragment : BottomSheetDialogFragment() {
                 is ClickMode.CircleCellMode -> {
                     binding.circleCellRadioButton.isChecked = true
                 }
-                else -> {binding.crosshairCellRadioButton.isChecked = true}
+                else -> {
+                    binding.crosshairCellRadioButton.isChecked = true
+                }
             }
         }
     }
